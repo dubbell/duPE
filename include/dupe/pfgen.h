@@ -52,5 +52,51 @@ public:
     void updateForce(Particle* particle, real duration) override;
 };
 
+class ParticleSpring : public ParticleForceGenerator
+{
+    Particle* other;
+    real springConstant, restLength;
+
+public:
+    ParticleSpring(Particle* other, real springConstant, real restLength) 
+        : other(other), springConstant(springConstant), restLength(restLength) {}
+
+    void updateForce(Particle* particle, real duration) override;
+};
+
+class ParticleAnchoredSpring : public ParticleForceGenerator
+{
+    Vector3* anchor;
+    real springConstant, restLength;
+
+public:
+    ParticleAnchoredSpring(Vector3* anchor, real springConstant, real restLength) : anchor(anchor), springConstant(springConstant), restLength(restLength) {}
+
+    void updateForce(Particle* particle, real duration) override;
+};
+
+class ParticleBungee : public ParticleForceGenerator
+{
+    Particle* other;
+    real springConstant, restLength;
+
+public:
+    ParticleBungee(Particle* other, real springConstant, real restLength) 
+        : other(other), springConstant(springConstant), restLength(restLength) {}
+
+    void updateForce(Particle* particle, real duration) override;
+};
+
+class ParticleBuoyancy : public ParticleForceGenerator
+{
+    real maxDepth, volume, waterHeight, liquidDensity;
+
+public:
+    ParticleBuoyancy(real maxDepth, real volume, real waterHeight, real liquidDensity = 1000.0f) 
+        : maxDepth(maxDepth), volume(volume), waterHeight(waterHeight), liquidDensity(liquidDensity) {}
+
+    void updateForce(Particle* particle, real duration) override;
+};
+
 
 #endif

@@ -14,10 +14,9 @@ protected:
     Vector3 velocity;
     Vector3 acceleration;
 
-    Vector3 forceAcc;
+    Vector3 forceAccumulator;
 
-    real damping;
-    real inverseMass;
+    real inverseMass, damping;
 
 public:
     void setInverseMass(real inverseMass)
@@ -35,12 +34,12 @@ public:
 
     void clearAccumulator()
     {
-        forceAcc.clear();
+        forceAccumulator.clear();
     }
 
     void addForce(const Vector3& force)
     {
-        forceAcc += force;
+        forceAccumulator += force;
     }
 
     bool hasFiniteMass()
@@ -56,6 +55,11 @@ public:
     Vector3 getVelocity()
     {
         return velocity;
+    }
+
+    Vector3 getPosition()
+    {
+        return position;
     }
 };
 

@@ -12,7 +12,7 @@ void Particle::integrate(real duration)
     position.addScaledVector(velocity, duration);
 
     Vector3 totalAcceleration = acceleration;
-    totalAcceleration.addScaledVector(forceAcc, inverseMass);
+    totalAcceleration.addScaledVector(forceAccumulator, inverseMass);
 
     velocity.addScaledVector(totalAcceleration, duration);
 
