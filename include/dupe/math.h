@@ -136,7 +136,12 @@ public:
             (*this) *= ((real)1) / m;
     }
 
-
+    void clear()
+    {
+        x = 0;
+        y = 0;
+        z = 0;
+    }
 };
 
 
