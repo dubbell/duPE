@@ -52,14 +52,34 @@ public:
         return 1 / inverseMass;
     }
 
+    Vector3 getAcceleration()
+    {
+        return acceleration + forceAccumulator * inverseMass;
+    }
+
     Vector3 getVelocity()
     {
         return velocity;
     }
 
+    void setVelocity(const Vector3& velocity)
+    {
+        this->velocity = velocity;
+    }
+
     Vector3 getPosition()
     {
         return position;
+    }
+
+    void setPosition(const Vector3& position)
+    {
+        this->position = position;
+    }
+
+    real getInverseMass()
+    {
+        return inverseMass;
     }
 };
 
