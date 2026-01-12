@@ -490,22 +490,22 @@ public:
 };
 
 
-Vector3 localToWorld(const Vector3& local, const Matrix4& transform)
+inline Vector3 localToWorld(const Vector3& local, const Matrix4& transform)
 {
     return transform.transform(local);
 }
 
-Vector3 worldToLocal(const Vector3& world, const Matrix4& transform)
+inline Vector3 worldToLocal(const Vector3& world, const Matrix4& transform)
 {
     return transform.transformInverse(world);
 }
 
-Vector3 localToWorldDirection(const Vector3& local, const Matrix4& transform)
+inline Vector3 localToWorldDirection(const Vector3& local, const Matrix4& transform)
 {
     return transform.transformDirection(local);
 }
 
-Vector3 worldToLocalDirection(const Vector3& world, const Matrix4& transform)
+inline Vector3 worldToLocalDirection(const Vector3& world, const Matrix4& transform)
 {
     return transform.transformInverseDirection(world);
 }
