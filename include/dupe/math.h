@@ -2,7 +2,7 @@
 #define DEFINITIONS_H
 
 #include <cmath>
-
+#include <limits>
 
 typedef float real;
 constexpr real REAL_MAX = std::numeric_limits<real>::max();
@@ -159,6 +159,8 @@ inline void createOrthonormalBasis(Vector3* a, Vector3* b, Vector3* c)
 class Quaternion
 {
 public:
+    Quaternion(real r, real i, real j, real k) : r(r), i(i), j(j), k(k) {}
+
     union {
         struct 
         {
@@ -169,7 +171,6 @@ public:
         };
 
         real data[4];
-        
     };
 
     void normalize()
@@ -236,7 +237,7 @@ public:
 
     Matrix3 operator*(const Matrix3& o) const
     {
-        return Matrix3(
+        return Matrix3{
             data[0] * o.data[0] + data[1] * o.data[3] + data[2] * o.data[6],
             data[0] * o.data[1] + data[1] * o.data[4] + data[2] * o.data[7],
             data[0] * o.data[2] + data[1] * o.data[5] + data[2] * o.data[8],
@@ -245,7 +246,7 @@ public:
             data[3] * o.data[2] + data[4] * o.data[5] + data[5] * o.data[8],
             data[6] * o.data[0] + data[7] * o.data[3] + data[8] * o.data[6],
             data[6] * o.data[1] + data[7] * o.data[4] + data[8] * o.data[7],
-            data[6] * o.data[2] + data[7] * o.data[5] + data[8] * o.data[8]);
+            data[6] * o.data[2] + data[7] * o.data[5] + data[8] * o.data[8]};
     }
 
     void operator*=(const Matrix3& o)
