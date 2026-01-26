@@ -97,7 +97,26 @@ void RigidBody::clearAccumulators()
 
 void RigidBody::integrate(real duration)
 {
+    lastFrameAcceleration = acceleration;
+    lastFrameAcceleration.addScaledVector(forceAcc, inverseMass);
 
+    Vector3 angularAcceleration = inverseInertiaWorld.transform(torqueAcc);
+
+    velocity.addScaledVector(lastFrameAcceleration, duration);
+    rotation.addScaledVector(angularAcceleration, duration);
+
+    velocity *= std::pow(linearDamping, duration);
+    rotation *= std::pow(angularDamping, duration);
+
+    position.addScaledVector(velocity, duration);
+    orientation.addScaledVector(rotation, duration);
+
+    calculateDerivedData();
 
     clearAccumulators();
+}
+
+bool RigidBody::hasFiniteMass()
+{
+    return inverseMass > 0;
 }

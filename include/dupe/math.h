@@ -7,6 +7,7 @@
 typedef float real;
 constexpr real REAL_MAX = std::numeric_limits<real>::max();
 
+
 class Vector3
 {
 public:
