@@ -112,7 +112,6 @@ void RigidBody::integrate(real duration)
     orientation.addScaledVector(rotation, duration);
 
     calculateDerivedData();
-
     clearAccumulators();
 }
 

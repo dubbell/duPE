@@ -1,14 +1,35 @@
 #ifndef FGEN_H
 #define FGEN_H
 
+#include <vector>
 
 #include "math.h"
 #include "body.h"
+
 
 class ForceGenerator
 {
 public:
     virtual void updateForce(RigidBody* body, real duration) = 0;
+};
+
+class ForceRegistry
+{
+protected:
+    struct ForceRegistration
+    {
+        RigidBody* body;
+        ForceGenerator* fg;
+    };
+
+    typedef std::vector<ForceRegistration> Registry;
+    Registry registrations;
+
+public:
+    void add(RigidBody* body, ForceGenerator* fg);
+    void remove(RigidBody* body, ForceGenerator* fg);
+    void clear();
+    void updateForces(real duration);
 };
 
 class Gravity : public ForceGenerator
